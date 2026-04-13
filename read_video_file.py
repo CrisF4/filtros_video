@@ -81,14 +81,15 @@ while capture.isOpened():
 
     if ret is True:
         # Display the resulting frame
-        frame_bgr = cv2.cvtColor(frame_resize, cv2.COLOR_RGB2BGR)
-        # frame_hsv = cv2.cvtColor(frame_rgb, cv2.COLOR_RGB2HSV)
-        frame_rc = recolorRC(frame_resize, frame_resize)
-        frame_rgv = recolorRGV(frame_resize, frame_resize)
-        frame_cmv = recolorCMV(frame_resize, frame_resize)
-        cv2.imshow('Original frame from the video file', frame_bgr)
+        frame_rgb = cv2.cvtColor(frame_resize, cv2.COLOR_BGR2RGB)
+        frame_bgr = cv2.cvtColor(frame_rgb, cv2.COLOR_RGB2BGR)
+        frame_hsv = cv2.cvtColor(frame_rgb, cv2.COLOR_RGB2HSV)
+        frame_rc = recolorRC(frame_resize, frame_resize.copy())
+        frame_rgv = recolorRGV(frame_resize, frame_resize.copy())
+        frame_cmv = recolorCMV(frame_resize, frame_resize.copy())
+        cv2.imshow('Original frame from the video file', frame_resize)
         cv2.imshow('RGB frame from the video file', frame_rgb)
-        # cv2.imshow('HSV frame from the video file', frame_hsv)
+        cv2.imshow('HSV frame from the video file', frame_hsv)
         cv2.imshow('RC frame from the video file', frame_rc)
         cv2.imshow('RGV frame from the video file', frame_rgv)
         cv2.imshow('CMV frame from the video file', frame_cmv)
@@ -100,7 +101,7 @@ while capture.isOpened():
         #cv2.imshow('Grayscale frame', gray_frame)
  
         # Press q on keyboard to exit the program
-        if cv2.waitKey(20) & 0xFF == ord('q'):
+        if cv2.waitKey(200) & 0xFF == ord('q'):
             break
     # Break the loop
     else:
